@@ -1,0 +1,12 @@
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\bin\Debug\net8.0\FakeStoreOrderCreator.Business.deps.json
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\bin\Debug\net8.0\FakeStoreOrderCreator.Business.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\bin\Debug\net8.0\FakeStoreOrderCreator.Business.pdb
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.csproj.AssemblyReference.cache
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.AssemblyInfoInputs.cache
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.AssemblyInfo.cs
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.csproj.CoreCompileInputs.cache
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\refint\FakeStoreOrderCreator.Business.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.pdb
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\ref\FakeStoreOrderCreator.Business.dll
