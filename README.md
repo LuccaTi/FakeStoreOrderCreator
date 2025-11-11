@@ -42,7 +42,7 @@ Funcionalidade de exemplo disponível:
     - Em falhas na inicialização, um arquivo é escrito em `StartupErrors/` para garantir rastreabilidade mesmo antes do logger estar ativo.
 
 - Tratamento de erros
-    - Exceções no startup são capturadas e registradas em arquivo dedicado antes de encerrar com `Environment.Exit(1)`.
+    - Exceções no startup são capturadas e registradas em arquivo dedicado antes de encerrar com codigo de saída diferente de zero.
     - Exceções durante execução são logadas e re-lançadas para que o TopShelf gerencie adequadamente.
 
 ## Configuração
