@@ -32,56 +32,74 @@ namespace FakeStoreOrderCreator.Business.Services
                 throw;
             }
         }
-        public List<Cart> GetCarts()
+        public async Task<List<Cart>> GetCartsAsync()
         {
             try
             {
-                Logger.Debug(_className, "GetCarts", $"Connecting to endpoint: {_httpClient.BaseAddress + "Carts"}");
-                var response = _httpClient.GetAsync("Cart").Result;
+                Logger.Debug(_className, "GetCartsAsync", $"Connecting to endpoint: {_httpClient.BaseAddress + "Carts"}");
+                var response = _httpClient.GetAsync("Carts").Result;
                 response.EnsureSuccessStatusCode();
-                Logger.Debug(_className, "GetCarts", $"Connection Success!");
-                var carts = response.Content.ReadFromJsonAsync<List<Cart>>().Result;
-                return carts ?? new List<Cart>();
+                Logger.Debug(_className, "GetCartsAsync", $"Connection Success!");
+                var carts = await response.Content.ReadFromJsonAsync<List<Cart>>();
+
+                if (carts is null || carts.Count == 0)
+                {
+                    throw new Exception($"Carts list obtained was null or empty, application can't create orders, status code: {response.StatusCode}");
+                }
+
+                return carts;
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "GetCarts", $"Error: {ex.Message}");
+                Logger.Error(_className, "GetCartsAsync", $"Error while consuming API to obtain data: {ex.Message}");
                 throw;
             }
         }
 
-        public List<Product> GetProducts()
+        public async Task<List<Product>> GetProductsAsync()
         {
             try
             {
-                Logger.Debug(_className, "GetProducts", $"Connecting to endpoint: {_httpClient.BaseAddress + "Products"}");
-                var response = _httpClient.GetAsync("Product").Result;
+                Logger.Debug(_className, "GetProductsAsync", $"Connecting to endpoint: {_httpClient.BaseAddress + "Products"}");
+                var response = _httpClient.GetAsync("Products").Result;
                 response.EnsureSuccessStatusCode();
-                Logger.Debug(_className, "GetProducts", $"Connection Success!");
-                var products = response.Content.ReadFromJsonAsync<List<Product>>().Result;
-                return products ?? new List<Product>();
+                Logger.Debug(_className, "GetProductsAsync", $"Connection Success!");
+                var products = await response.Content.ReadFromJsonAsync<List<Product>>();
+
+                if (products is null || products.Count == 0)
+                {
+                    throw new Exception($"Products list obtained was null or empty, application can't create orders, status code: {response.StatusCode}");
+                }
+
+                return products;
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "GetProducts", $"Error: {ex.Message}");
+                Logger.Error(_className, "GetProductsAsync", $"Error while consuming API to obtain data: {ex.Message}");
                 throw;
             }
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsersAsync()
         {
             try
             {
-                Logger.Debug(_className, "GetUsers", $"Connecting to endpoint: {_httpClient.BaseAddress + "Users"}");
-                var response = _httpClient.GetAsync("User").Result;
+                Logger.Debug(_className, "GetUsersAsync", $"Connecting to endpoint: {_httpClient.BaseAddress + "Users"}");
+                var response = _httpClient.GetAsync("Users").Result;
                 response.EnsureSuccessStatusCode();
-                Logger.Debug(_className, "GetUsers", $"Connection Success!");
-                var users = response.Content.ReadFromJsonAsync<List<User>>().Result;
-                return users ?? new List<User>();
+                Logger.Debug(_className, "GetUsersAsync", $"Connection Success!");
+                var users = await response.Content.ReadFromJsonAsync<List<User>>();
+
+                if (users is null || users.Count == 0)
+                {
+                    throw new Exception($"Users list obtained was null or empty, application can't create orders, status code: {response.StatusCode}");
+                }
+
+                return users;
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "GetUsers", $"Error: {ex.Message}");
+                Logger.Error(_className, "GetUsersAsync", $"Error while consuming API to obtain data: {ex.Message}");
                 throw;
             }
         }

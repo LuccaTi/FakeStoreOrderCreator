@@ -14,7 +14,6 @@ namespace FakeStoreOrderCreator.Business
         #region Attributes
         private const string _className = "ServiceLifeCycleManager";
         private List<Task> _tasks;
-        private bool _isRunning;
         #endregion
 
         #region Dependencies
@@ -26,10 +25,8 @@ namespace FakeStoreOrderCreator.Business
             try
             {
 
-                _isRunning = true;
                 _tasks = new List<Task>();
                 _orchestrator = orchestrator;
-                _orchestrator.IsRunningFunc = () => _isRunning;
             }
             catch (Exception ex)
             {
@@ -57,7 +54,7 @@ namespace FakeStoreOrderCreator.Business
         {
             try
             {
-                _tasks.Add(Task.Run(_orchestrator.EventHandler));
+                _tasks.Add(Task.Run(_orchestrator.EventHandlerAsync));
             }
             catch (Exception ex)
             {
@@ -70,7 +67,6 @@ namespace FakeStoreOrderCreator.Business
             try
             {
                 Logger.Info("Request to stop received, stopping application...");
-                _isRunning = false;
                 _orchestrator.SignalStop();
                 Dispose();
             }

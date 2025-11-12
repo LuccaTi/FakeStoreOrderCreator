@@ -9,8 +9,8 @@ namespace FakeStoreOrderCreator.Business.Interfaces
 {
     public interface IApiService
     {
-        public List<Cart> GetCarts();
-        public List<Product> GetProducts();
-        public List<User> GetUsers();
+        public Task<List<Cart>> GetCartsAsync();
+        public Task<List<Product>> GetProductsAsync();
+        public Task<List<User>> GetUsersAsync();
     }
 }

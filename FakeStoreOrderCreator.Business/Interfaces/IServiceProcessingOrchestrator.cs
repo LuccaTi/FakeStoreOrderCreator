@@ -8,8 +8,7 @@ namespace FakeStoreOrderCreator.Business.Interfaces
 {
     public interface IServiceProcessingOrchestrator
     {
-        Func<bool> IsRunningFunc { get; set; }
-        public void EventHandler();
+        public Task EventHandlerAsync();
         public void SignalStop();
     }
 }

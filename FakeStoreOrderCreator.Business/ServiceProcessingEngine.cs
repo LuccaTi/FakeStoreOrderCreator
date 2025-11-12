@@ -39,19 +39,32 @@ namespace FakeStoreOrderCreator.Business
             }
         }
 
-        public void ProcessOrders()
+        public async Task ProcessOrdersAsync()
         {
             try
             {
                 Logger.Info("Obtaining data from API...");
-                _carts = _apiService.GetCarts();
-                _products = _apiService.GetProducts();
-                _users = _apiService.GetUsers();
+                _carts = await _apiService.GetCartsAsync();
+                _products = await _apiService.GetProductsAsync();
+                _users = await _apiService.GetUsersAsync();
                 Logger.Info("Data Obtained!");
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "ProcessOrders", $"Error: {ex.Message}");
+                Logger.Error(_className, "ProcessOrdersAsync", $"Error: {ex.Message}");
+                throw;
+            }
+        }
+
+        public void CreateOrders()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(_className, "CreateOrders", $"Error: {ex.Message}");
                 throw;
             }
         }

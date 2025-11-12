@@ -16,15 +16,10 @@ namespace FakeStoreOrderCreator.Business
     {
         #region Attributes
         private const string _className = "ServiceProcessingOrchestrator";
-        private readonly int _timerFiles;
-        private readonly AutoResetEvent _autoResetEvent;
-        private bool _disposed = false;
-        private readonly object _disposeLock = new object();
+        private readonly int _timerSeconds;
+        private readonly CancellationTokenSource _cancellationTokenSource;
         #endregion
 
-        #region Properties
-        public Func<bool> IsRunningFunc { get; set; } = () => false;
-        #endregion
 
         #region Dependencies
         private readonly IServiceProcessingEngine _serviceProcessingEngine;
@@ -34,8 +29,8 @@ namespace FakeStoreOrderCreator.Business
         {
             try
             {
-                _timerFiles = Config.Interval;
-                _autoResetEvent = new AutoResetEvent(false);
+                _timerSeconds = Config.Interval;
+                _cancellationTokenSource = new CancellationTokenSource();
                 _serviceProcessingEngine = serviceProcessingEngine;
             }
             catch (Exception ex)
@@ -45,30 +40,25 @@ namespace FakeStoreOrderCreator.Business
             }
         }
 
-        public void EventHandler()
+        public async Task EventHandlerAsync()
         {
-            while (IsRunningFunc())
+            while (!_cancellationTokenSource.IsCancellationRequested)
             {
                 try
                 {
-                    _serviceProcessingEngine.ProcessOrders();
+                    await _serviceProcessingEngine.ProcessOrdersAsync();
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(_className, "EventHandler", $"Error: {ex.Message}");
+                    Logger.Error(_className, "EventHandlerAsync", $"Error: {ex.Message}");
                 }
-                finally
+                try
                 {
-                    _autoResetEvent.WaitOne(TimeSpan.FromSeconds(_timerFiles));
+                    await Task.Delay(TimeSpan.FromSeconds(_timerSeconds), _cancellationTokenSource.Token);
                 }
-            }
-
-            lock (_disposeLock)
-            {
-                if (!_disposed)
+                catch (TaskCanceledException)
                 {
-                    _autoResetEvent.Dispose();
-                    _disposed = true;
+                    break;
                 }
             }
         }
@@ -77,12 +67,9 @@ namespace FakeStoreOrderCreator.Business
         {
             try
             {
-                lock (_disposeLock)
+                if (!_cancellationTokenSource.IsCancellationRequested)
                 {
-                    if (!_disposed)
-                    {
-                        _autoResetEvent.Set();
-                    }
+                    _cancellationTokenSource.Cancel();
                 }
             }
             catch (Exception ex)
