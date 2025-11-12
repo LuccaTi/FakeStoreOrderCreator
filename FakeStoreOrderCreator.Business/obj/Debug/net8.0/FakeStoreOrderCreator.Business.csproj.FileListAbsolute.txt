@@ -10,3 +10,7 @@ C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business
 C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\refint\FakeStoreOrderCreator.Business.dll
 C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.pdb
 C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\ref\FakeStoreOrderCreator.Business.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\bin\Debug\net8.0\FakeStoreOrderCreator.Library.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\bin\Debug\net8.0\FakeStoreOrderCreator.Library.pdb
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStoreOrderCreator.Business.sourcelink.json
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Business\obj\Debug\net8.0\FakeStor.3795035F.Up2Date

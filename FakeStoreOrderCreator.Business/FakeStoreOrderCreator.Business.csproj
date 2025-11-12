@@ -16,4 +16,8 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FakeStoreOrderCreator.Library\FakeStoreOrderCreator.Library.csproj" />
+  </ItemGroup>
+
 </Project>

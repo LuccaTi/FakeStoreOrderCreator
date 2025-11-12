@@ -1,10 +1,14 @@
 ﻿using FakeStoreOrderCreator.Business;
 using FakeStoreOrderCreator.Business.Configuration;
+using FakeStoreOrderCreator.Business.Interfaces;
 using FakeStoreOrderCreator.Business.Logging;
+using FakeStoreOrderCreator.Business.Services;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 using System;
 using System.IO;
+using System.Net.Security;
 using Topshelf;
 
 namespace FakeStoreOrderCreator.Host
@@ -17,12 +21,17 @@ namespace FakeStoreOrderCreator.Host
             {
                 Config.LoadConfig();
 
+                // DI Container
+                var services = new ServiceCollection();
+                ConfigureServices(services);
+                var serviceProvider = services.BuildServiceProvider();
+
                 // Start TopShelf
                 var exitCode = HostFactory.Run(hostConfig =>
                 {
-                    hostConfig.Service<FakeStoreOrderService>(config =>
+                    hostConfig.Service<ServiceLifeCycleManager>(config =>
                     {
-                        config.ConstructUsing(work => new FakeStoreOrderService());
+                        config.ConstructUsing(work => serviceProvider.GetRequiredService<ServiceLifeCycleManager>());
                         config.WhenStarted((work, _) =>
                         {
                             Logger.Info("Starting application...");
@@ -60,6 +69,56 @@ namespace FakeStoreOrderCreator.Host
 
         }
 
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            try
+            {
+                // HttpClient
+                bool isDevelopment = IsDevelopmentEnvironment();
+                services.AddHttpClient<IApiService, ApiService>(client =>
+                {
+                    client.BaseAddress = new Uri(Config.ApiUrl);
+                    client.Timeout = TimeSpan.FromSeconds(30);
+                })
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                {
+                    var handler = new System.Net.Http.HttpClientHandler();
+
+                    if (isDevelopment)
+                    {
+                        handler.ServerCertificateCustomValidationCallback =
+                            (message, cert, chain, errors) => true;
+                        Logger.Info("SSL certificate validation is disabled (Development mode)");
+                    }
+
+                    return handler;
+                });
+
+                services.AddSingleton<IServiceProcessingOrchestrator, ServiceProcessingOrchestrator>();
+                services.AddSingleton<IServiceProcessingEngine, ServiceProcessingEngine>();
+                services.AddSingleton<IFileService, FileService>();
+                services.AddSingleton<ServiceLifeCycleManager>();
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Program.cs", "ConfigureServices", $"Error while configuring services: {ex.Message}");
+                throw;
+            }
+        }
+        private static bool IsDevelopmentEnvironment()
+        {
+            try
+            {
+                string apiUrl = Config.ApiUrl.ToLower();
+                return apiUrl.Contains("localhost") || apiUrl.Contains("127.0.0.1");
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("Program.cs", "IsDevelopmentEnvironment", $"Error while trying to get application environment: {ex.Message}");
+                throw;
+            }
+           
+        }
         private static void HandleStartupError(Exception exception)
         {
             // Creates a file due to the chance that the Logger may not have been initialized

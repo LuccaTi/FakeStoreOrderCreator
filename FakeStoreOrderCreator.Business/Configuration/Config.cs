@@ -22,11 +22,11 @@ namespace FakeStoreOrderCreator.Business.Configuration
         #region Properties
         public static string FakeStoreDirectory
         {
-            get { return FakeStoreDirectory; }
+            get { return _fakeStoreDirectory!; }
         }
         public static string ApiUrl
         {
-            get { return ApiUrl; }
+            get { return _apiUrl!; }
         }
         public static int Interval
         {

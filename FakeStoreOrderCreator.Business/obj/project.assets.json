@@ -345,6 +345,16 @@
         "build": {
           "buildTransitive/net8.0/System.Text.Json.targets": {}
         }
+      },
+      "FakeStoreOrderCreator.Library/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/FakeStoreOrderCreator.Library.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FakeStoreOrderCreator.Library.dll": {}
+        }
       }
     }
   },
@@ -914,10 +924,16 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "FakeStoreOrderCreator.Library/1.0.0": {
+      "type": "project",
+      "path": "../FakeStoreOrderCreator.Library/FakeStoreOrderCreator.Library.csproj",
+      "msbuildProject": "../FakeStoreOrderCreator.Library/FakeStoreOrderCreator.Library.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "FakeStoreOrderCreator.Library >= 1.0.0",
       "Microsoft.Extensions.Configuration >= 9.0.10",
       "Microsoft.Extensions.Configuration.Binder >= 9.0.10",
       "Microsoft.Extensions.Configuration.Json >= 9.0.10",
@@ -958,7 +974,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\tirel\\source\\repos\\FakeStoreOrderCreator\\FakeStoreOrderCreator.Library\\FakeStoreOrderCreator.Library.csproj": {
+              "projectPath": "C:\\Users\\tirel\\source\\repos\\FakeStoreOrderCreator\\FakeStoreOrderCreator.Library\\FakeStoreOrderCreator.Library.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1022,7 +1042,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

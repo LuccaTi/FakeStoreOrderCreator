@@ -1,6 +1,6 @@
 ﻿using FakeStoreOrderCreator.Business.Configuration;
+using FakeStoreOrderCreator.Business.Interfaces;
 using FakeStoreOrderCreator.Business.Logging;
-using FakeStoreOrderCreator.Business.Services;
 using Microsoft.Extensions.Configuration;
 using Serilog;
 using System.Reflection.Metadata.Ecma335;
@@ -9,29 +9,31 @@ using System.Timers;
 
 namespace FakeStoreOrderCreator.Business
 {
-    public class FakeStoreOrderService
+    public class ServiceLifeCycleManager
     {
         #region Attributes
-        private const string _className = "FakeStoreOrderService";
+        private const string _className = "ServiceLifeCycleManager";
         private List<Task> _tasks;
         private bool _isRunning;
         #endregion
 
         #region Dependencies
-        private WorkFlowService _workFlowService;
+        private readonly IServiceProcessingOrchestrator _orchestrator;
         #endregion
 
-        public FakeStoreOrderService()
+        public ServiceLifeCycleManager(IServiceProcessingOrchestrator orchestrator)
         {
             try
             {
+
                 _isRunning = true;
-                _workFlowService = new WorkFlowService(() => _isRunning);
                 _tasks = new List<Task>();
+                _orchestrator = orchestrator;
+                _orchestrator.IsRunningFunc = () => _isRunning;
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "FakeStoreOrderService constructor", $"Error: {ex.ToString()}{Environment.NewLine}Application will be terminated by TopShelf!");
+                Logger.Error(_className, "ServiceLifeCycleManager constructor", $"Error: {ex.ToString()}{Environment.NewLine}Application will be terminated by TopShelf!");
                 throw;
             }
         }
@@ -55,7 +57,7 @@ namespace FakeStoreOrderCreator.Business
         {
             try
             {
-                _tasks.Add(Task.Run(_workFlowService.EventHandler));
+                _tasks.Add(Task.Run(_orchestrator.EventHandler));
             }
             catch (Exception ex)
             {
@@ -69,7 +71,7 @@ namespace FakeStoreOrderCreator.Business
             {
                 Logger.Info("Request to stop received, stopping application...");
                 _isRunning = false;
-                _workFlowService.SignalStop();
+                _orchestrator.SignalStop();
                 Dispose();
             }
             catch (Exception ex)

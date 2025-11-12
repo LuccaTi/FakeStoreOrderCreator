@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "FakeStoreOrderCreator.Business/1.0.0": {
         "dependencies": {
+          "FakeStoreOrderCreator.Library": "1.0.0",
           "Microsoft.Extensions.Configuration": "9.0.10",
           "Microsoft.Extensions.Configuration.Binder": "9.0.10",
           "Microsoft.Extensions.Configuration.Json": "9.0.10",
@@ -231,6 +232,14 @@
             "fileVersion": "9.0.1025.47515"
           }
         }
+      },
+      "FakeStoreOrderCreator.Library/1.0.0": {
+        "runtime": {
+          "FakeStoreOrderCreator.Library.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -365,6 +374,11 @@
       "sha512": "sha512-XM02ZBnzxk7Ti6l9YRy8Bp639wANqJzJzw4W4VYiCh+HXY9hBOWkGB4k89OLP/s/RxgM02P4a/mWcJTgFiLf1Q==",
       "path": "system.text.json/9.0.10",
       "hashPath": "system.text.json.9.0.10.nupkg.sha512"
+    },
+    "FakeStoreOrderCreator.Library/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -5,50 +5,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FakeStoreOrderCreator.Library.Models.Api;
+using FakeStoreOrderCreator.Library.Models.Internal;
+using FakeStoreOrderCreator.Business.Services;
+using FakeStoreOrderCreator.Business.Interfaces;
 
-namespace FakeStoreOrderCreator.Business.Services
+namespace FakeStoreOrderCreator.Business
 {
-    public class WorkFlowService
+    public class ServiceProcessingOrchestrator : IServiceProcessingOrchestrator
     {
         #region Attributes
-        private const string _className = "WorkFlowService";
+        private const string _className = "ServiceProcessingOrchestrator";
         private readonly int _timerFiles;
         private readonly AutoResetEvent _autoResetEvent;
-        private readonly Func<bool> _isRunningFunc;
         private bool _disposed = false;
         private readonly object _disposeLock = new object();
         #endregion
 
-        #region Dependencies
-        private ApiService _apiService;
-        private FileService _fileService;
+        #region Properties
+        public Func<bool> IsRunningFunc { get; set; } = () => false;
         #endregion
 
-        public WorkFlowService(Func<bool> isRunningFunc)
+        #region Dependencies
+        private readonly IServiceProcessingEngine _serviceProcessingEngine;
+        #endregion
+
+        public ServiceProcessingOrchestrator(IServiceProcessingEngine serviceProcessingEngine)
         {
             try
             {
                 _timerFiles = Config.Interval;
-                _isRunningFunc = isRunningFunc;
                 _autoResetEvent = new AutoResetEvent(false);
-                _apiService = new ApiService();
-                _fileService = new FileService();
+                _serviceProcessingEngine = serviceProcessingEngine;
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "WorkFlowService constructor", $"Error: {ex.Message}");
+                Logger.Error(_className, "ServiceProcessingOrchestrator constructor", $"Error: {ex.Message}");
                 throw;
             }
         }
 
         public void EventHandler()
         {
-
-            while (_isRunningFunc())
+            while (IsRunningFunc())
             {
                 try
                 {
-
+                    _serviceProcessingEngine.ProcessOrders();
                 }
                 catch (Exception ex)
                 {

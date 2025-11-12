@@ -44,3 +44,16 @@ C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\obj
 C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\obj\Debug\net8.0\FakeStoreOrderCreator.Host.pdb
 C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\obj\Debug\net8.0\FakeStoreOrderCreator.Host.genruntimeconfig.cache
 C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\obj\Debug\net8.0\ref\FakeStoreOrderCreator.Host.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\FakeStoreOrderCreator.Library.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\FakeStoreOrderCreator.Library.pdb
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\obj\Debug\net8.0\FakeStoreOrderCreator.Host.sourcelink.json
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Http.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\tirel\source\repos\FakeStoreOrderCreator\FakeStoreOrderCreator.Host\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
