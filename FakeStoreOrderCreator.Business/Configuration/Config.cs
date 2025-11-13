@@ -56,7 +56,7 @@ namespace FakeStoreOrderCreator.Business.Configuration
 
                 int interval = Convert.ToInt32(_config["AppConfig:Interval"]);
                 _interval = interval == 0 ? 60 : interval;
-                Logger.Debug(_className, "LoadConfig", $"Interval: {_interval} segundos");
+                Logger.Debug(_className, "LoadConfig", $"Interval: {_interval} seconds");
 
                 Logger.Info("Settings loaded!");
             }
