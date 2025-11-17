@@ -36,7 +36,7 @@ namespace FakeStoreOrderCreator.Business
             }
             catch (Exception ex)
             {
-                Logger.Error(_className, "ServiceProcessingEngine Constructor", $"Error: {ex.Message}");
+                Logger.Error(_className, "ServiceProcessingEngine constructor", $"Error: {ex.Message}");
                 throw;
             }
         }
@@ -81,7 +81,7 @@ namespace FakeStoreOrderCreator.Business
             }
             catch (OperationCanceledException)
             {
-                Logger.Debug(_className, "ProcessOrdersAsync", "Processing was canceled via token");
+                Logger.Debug(_className, "ProcessOrdersAsync", "Application termination by signaling and cancellation token");
                 throw;
             }
             catch (Exception ex)

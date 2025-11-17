@@ -51,7 +51,7 @@ namespace FakeStoreOrderCreator.Business
                 }
                 catch (OperationCanceledException)
                 {
-                    Logger.Debug(_className, "EventHandlerAsync", "Processing was canceled by stop signal.");
+                    Logger.Debug(_className, "EventHandlerAsync", "Application termination by signaling and cancellation token");
                     break;
                 }
                 catch (Exception ex)
