@@ -1,6 +1,7 @@
 ﻿using FakeStoreOrderCreator.Business.Interfaces;
 using FakeStoreOrderCreator.Business.Logging;
 using FakeStoreOrderCreator.Library.Models.Api;
+using FakeStoreOrderCreator.Library.Models.Enums;
 using FakeStoreOrderCreator.Library.Models.Internal;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace FakeStoreOrderCreator.Business
         private List<Product> _products = new();
         private List<User> _users = new();
         private List<Order> _orders = new();
+        private List<Order> _paymentConfirmedOrders = new();
         #endregion
 
         #region Dependencies
@@ -39,19 +41,48 @@ namespace FakeStoreOrderCreator.Business
             }
         }
 
-        public async Task ProcessOrdersAsync()
+        #region Methods
+        public async Task ProcessOrdersAsync(CancellationToken cancellationToken)
         {
             try
             {
                 Logger.Info("Obtaining data from API...");
-                _carts = await _apiService.GetCartsAsync();
-                _products = await _apiService.GetProductsAsync();
-                _users = await _apiService.GetUsersAsync();
+                _carts = await _apiService.GetCartsAsync(cancellationToken);
+                _products = await _apiService.GetProductsAsync(cancellationToken);
+                _users = await _apiService.GetUsersAsync(cancellationToken);
                 Logger.Info("All data Obtained!");
 
-                Logger.Info("Creating Orders...");
+                Logger.Info("Creating product register files");
+                _fileService.CreateProductRegisterFiles(_products);
+                Logger.Info("All product register files created");
+
+                Logger.Info("Creating orders...");
                 CreateOrders();
+                Logger.Info("All orders added to application memory");
+
+                Logger.Info("Creating order files...");
+                _fileService.CreateOrderFiles(_orders);
+                Logger.Info("All order files created");
+
+                Logger.Info("Checking order payments...");
+                ConfirmPayment();
+                Logger.Info("Payments checked");
+
+                Logger.Info("Creating payment confirmed files...");
+                _fileService.CreatePaymentConfirmedFiles(_paymentConfirmedOrders);
+                Logger.Info("All payment confirmed files created");
+
+                Logger.Info("Delivering orders...");
+                await DeliverOrdersAsync(cancellationToken);
+                Logger.Info("All orders delivered");
+
                 _orders = new();
+                _paymentConfirmedOrders = new();
+            }
+            catch (OperationCanceledException)
+            {
+                Logger.Debug(_className, "ProcessOrdersAsync", "Processing was canceled via token");
+                throw;
             }
             catch (Exception ex)
             {
@@ -59,7 +90,6 @@ namespace FakeStoreOrderCreator.Business
                 throw;
             }
         }
-
         public void CreateOrders()
         {
             try
@@ -67,9 +97,15 @@ namespace FakeStoreOrderCreator.Business
                 foreach (var cart in _carts)
                 {
                     Logger.Debug(_className, "CreateOrders", $"Cart id: {cart.Id}");
-                    var order = new Order();
-                    var user = _users.FirstOrDefault(u => u.Id == cart.UserId);
+                    var order = new Order()
+                    {
+                        OrderGuid = Guid.NewGuid().ToString(),
+                        OrderDate = DateTime.Now,
+                        PaymentStatus = PaymentStatus.Pending,
+                        ShippingStatus = ShippingStatus.NotStarted
+                    };
 
+                    var user = _users.FirstOrDefault(u => u.Id == cart.UserId);
                     if (user == null)
                     {
                         Logger.Debug(_className, "CreateOrders", $"User not found for cart with id: {cart.Id}, order will not be created!");
@@ -117,15 +153,9 @@ namespace FakeStoreOrderCreator.Business
                         continue;
                     }
 
-
                     _orders.Add(order);
-                    Logger.Debug(_className, "CreateOrders", $"Order added to application memory");
+                    Logger.Debug(_className, "CreateOrders", $"Order: {order.OrderGuid} added to application memory");
                 }
-
-                Logger.Debug(_className, "CreateOrders", "All orders added to application memory, proceeding to create order files...");
-
-                _fileService.CreateOrderFiles(_orders);
-                Logger.Info("All order files created");
             }
             catch (Exception ex)
             {
@@ -133,5 +163,66 @@ namespace FakeStoreOrderCreator.Business
                 throw;
             }
         }
+        public void ConfirmPayment()
+        {
+            try
+            {
+                foreach (var order in _orders)
+                {
+                    Random rand = new Random();
+                    bool paymentConfirmed = rand.Next(2) == 1;
+
+                    if (paymentConfirmed)
+                    {
+                        order.PaymentStatus = PaymentStatus.Confirmed;
+                        order.PaymentDate = DateTime.Now;
+                        _paymentConfirmedOrders.Add(order);
+                        Logger.Debug(_className, "ConfirmPayment", $"Payment confirmed for order: {order.OrderGuid}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(_className, "ConfirmPayment", $"Error: {ex.Message}");
+                throw;
+            }
+        }
+        public async Task DeliverOrdersAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                foreach (var order in _paymentConfirmedOrders)
+                {
+                    order.ShippingStatus = ShippingStatus.Shipped;
+                    order.ShippedDate = DateTime.Now;
+                }
+
+                Logger.Info("Creating order shipped files...");
+                _fileService.CreateOrderShippedFiles(_paymentConfirmedOrders);
+                Logger.Info("All order shipped files created");
+
+                await Task.Delay(TimeSpan.FromSeconds(60), cancellationToken);
+
+                foreach (var order in _paymentConfirmedOrders)
+                {
+                    order.ShippingStatus = ShippingStatus.Delivered;
+                    order.DeliveredDate = DateTime.Now;
+                }
+
+                Logger.Info("Creating order delivered files...");
+                _fileService.CreateOrderDeliveredFiles(_paymentConfirmedOrders);
+                Logger.Info("All order delivered files created");
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(_className, "DeliverOrdersAsync", $"Error: {ex.Message}");
+                throw;
+            }
+        }
+        #endregion
     }
 }

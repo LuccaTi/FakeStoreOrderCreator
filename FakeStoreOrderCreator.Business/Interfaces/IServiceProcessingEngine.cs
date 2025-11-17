@@ -8,6 +8,6 @@ namespace FakeStoreOrderCreator.Business.Interfaces
 {
     public interface IServiceProcessingEngine
     {
-        public Task ProcessOrdersAsync();
+        public Task ProcessOrdersAsync(CancellationToken cancellationToken);
     }
 }

@@ -906,6 +906,23 @@
           }
         }
       },
+      "Topshelf.Serilog/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.10.0",
+          "Topshelf": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Topshelf.Serilog.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Topshelf.Serilog.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "TopShelf.ServiceInstaller/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -3037,6 +3054,21 @@
         "topshelf.nuspec"
       ]
     },
+    "Topshelf.Serilog/4.3.0": {
+      "sha512": "kHn3iOFb2djHX5SQQLbdTCOYTyHRfFKaHb3SxZHfDsNobiHxCZClz7V69yGI8yR1LUzQGX7lSIBdfpAHbTecsA==",
+      "type": "package",
+      "path": "topshelf.serilog/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/Topshelf.Serilog.dll",
+        "lib/net452/Topshelf.Serilog.xml",
+        "lib/netstandard2.0/Topshelf.Serilog.dll",
+        "lib/netstandard2.0/Topshelf.Serilog.xml",
+        "topshelf.serilog.4.3.0.nupkg.sha512",
+        "topshelf.serilog.nuspec"
+      ]
+    },
     "TopShelf.ServiceInstaller/4.3.0": {
       "sha512": "z+jcfvIg3uewe9lBkWpXslxEafqPusV7T4B/Y2TiBdixnfbfFG19YgnnsZMlP5kG9zzPsx6VceYUNzfxVEQjcA==",
       "type": "package",
@@ -3071,7 +3103,8 @@
       "Microsoft.Extensions.Http >= 10.0.0",
       "Serilog >= 4.3.0",
       "Serilog.Sinks.File >= 7.0.0",
-      "Topshelf >= 4.3.0"
+      "Topshelf >= 4.3.0",
+      "Topshelf.Serilog >= 4.3.0"
     ]
   },
   "packageFolders": {
@@ -3157,6 +3190,10 @@
             "version": "[7.0.0, )"
           },
           "Topshelf": {
+            "target": "Package",
+            "version": "[4.3.0, )"
+          },
+          "Topshelf.Serilog": {
             "target": "Package",
             "version": "[4.3.0, )"
           }

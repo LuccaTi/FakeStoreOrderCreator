@@ -16,7 +16,8 @@
           "Microsoft.Extensions.Http": "10.0.0",
           "Serilog": "4.3.0",
           "Serilog.Sinks.File": "7.0.0",
-          "Topshelf": "4.3.0"
+          "Topshelf": "4.3.0",
+          "Topshelf.Serilog": "4.3.0"
         },
         "runtime": {
           "FakeStoreOrderCreator.Host.dll": {}
@@ -530,6 +531,18 @@
           }
         }
       },
+      "Topshelf.Serilog/4.3.0": {
+        "dependencies": {
+          "Serilog": "4.3.0",
+          "Topshelf": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Topshelf.Serilog.dll": {
+            "assemblyVersion": "4.3.0.0",
+            "fileVersion": "4.3.0.0"
+          }
+        }
+      },
       "TopShelf.ServiceInstaller/4.3.0": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.7.0",
@@ -926,6 +939,13 @@
       "sha512": "sha512-yQ55E3QQUYceETqwpsiwqpLTcn+0k7vadoquUjFZy/unhRDZukaE2JBcmdpxa0cCJwxLV7Ao4wCzPBfeA+BhXg==",
       "path": "topshelf/4.3.0",
       "hashPath": "topshelf.4.3.0.nupkg.sha512"
+    },
+    "Topshelf.Serilog/4.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kHn3iOFb2djHX5SQQLbdTCOYTyHRfFKaHb3SxZHfDsNobiHxCZClz7V69yGI8yR1LUzQGX7lSIBdfpAHbTecsA==",
+      "path": "topshelf.serilog/4.3.0",
+      "hashPath": "topshelf.serilog.4.3.0.nupkg.sha512"
     },
     "TopShelf.ServiceInstaller/4.3.0": {
       "type": "package",

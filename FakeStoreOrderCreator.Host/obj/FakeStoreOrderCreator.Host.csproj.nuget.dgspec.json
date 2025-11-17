@@ -184,6 +184,10 @@
             "Topshelf": {
               "target": "Package",
               "version": "[4.3.0, )"
+            },
+            "Topshelf.Serilog": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [

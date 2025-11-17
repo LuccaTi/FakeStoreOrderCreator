@@ -45,13 +45,18 @@ namespace FakeStoreOrderCreator.Host
                             Logger.Info("Application terminated!");
                             return true;
                         });
+
                     });
+
+                    if (Config.WriteLogConsole)
+                    {
+                        hostConfig.UseSerilog();
+                    }
 
                     hostConfig.RunAsLocalSystem();
                     hostConfig.SetServiceName("FakeStoreOrderCreator");
                     hostConfig.SetDisplayName("FakeStoreOrderCreator");
                     hostConfig.SetDescription("Creates JSON files that register the orders of the fake store.");
-
                 });
 
                 // For generic cases: (int)Convert.ChangeType(exitCode, exitCode.GetTypeCode());

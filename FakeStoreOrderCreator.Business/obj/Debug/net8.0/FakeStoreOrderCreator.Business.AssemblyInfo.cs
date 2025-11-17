@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FakeStoreOrderCreator.Business")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c5c87f929bd08dfc9c8e27407b515f63aff416af")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+210d3eb568228cbb8c614d945f1ff4dc9658892c")]
 [assembly: System.Reflection.AssemblyProductAttribute("FakeStoreOrderCreator.Business")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FakeStoreOrderCreator.Business")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

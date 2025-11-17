@@ -32,7 +32,9 @@ namespace FakeStoreOrderCreator.Business.Services
                 throw;
             }
         }
-        public async Task<List<Cart>> GetCartsAsync()
+
+        #region Methods
+        public async Task<List<Cart>> GetCartsAsync(CancellationToken cancellationToken)
         {
             try
             {
@@ -55,8 +57,7 @@ namespace FakeStoreOrderCreator.Business.Services
                 throw;
             }
         }
-
-        public async Task<List<Product>> GetProductsAsync()
+        public async Task<List<Product>> GetProductsAsync(CancellationToken cancellationToken)
         {
             try
             {
@@ -79,8 +80,7 @@ namespace FakeStoreOrderCreator.Business.Services
                 throw;
             }
         }
-
-        public async Task<List<User>> GetUsersAsync()
+        public async Task<List<User>> GetUsersAsync(CancellationToken cancellationToken)
         {
             try
             {
@@ -103,5 +103,7 @@ namespace FakeStoreOrderCreator.Business.Services
                 throw;
             }
         }
+
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WiXZPi4+cw8=",
+  "dgSpecHash": "7l0T6mE5xKs=",
   "success": true,
   "projectFilePath": "C:\\Users\\tirel\\source\\repos\\FakeStoreOrderCreator\\FakeStoreOrderCreator.Host\\FakeStoreOrderCreator.Host.csproj",
   "expectedPackageFiles": [
@@ -54,6 +54,7 @@
     "C:\\Users\\tirel\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\tirel\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\tirel\\.nuget\\packages\\topshelf\\4.3.0\\topshelf.4.3.0.nupkg.sha512",
+    "C:\\Users\\tirel\\.nuget\\packages\\topshelf.serilog\\4.3.0\\topshelf.serilog.4.3.0.nupkg.sha512",
     "C:\\Users\\tirel\\.nuget\\packages\\topshelf.serviceinstaller\\4.3.0\\topshelf.serviceinstaller.4.3.0.nupkg.sha512"
   ],
   "logs": []

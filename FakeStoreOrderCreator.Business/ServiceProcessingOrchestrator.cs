@@ -40,13 +40,19 @@ namespace FakeStoreOrderCreator.Business
             }
         }
 
+        #region Methods
         public async Task EventHandlerAsync()
         {
             while (!_cancellationTokenSource.IsCancellationRequested)
             {
                 try
                 {
-                    await _serviceProcessingEngine.ProcessOrdersAsync();
+                    await _serviceProcessingEngine.ProcessOrdersAsync(_cancellationTokenSource.Token);
+                }
+                catch (OperationCanceledException)
+                {
+                    Logger.Debug(_className, "EventHandlerAsync", "Processing was canceled by stop signal.");
+                    break;
                 }
                 catch (Exception ex)
                 {
@@ -62,7 +68,6 @@ namespace FakeStoreOrderCreator.Business
                 }
             }
         }
-
         public void SignalStop()
         {
             try
@@ -78,5 +83,6 @@ namespace FakeStoreOrderCreator.Business
                 throw;
             }
         }
+        #endregion
     }
 }
