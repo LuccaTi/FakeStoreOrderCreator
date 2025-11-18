@@ -25,37 +25,20 @@ namespace FakeStoreOrderCreator.Business.Logging
             {
                 if (!Directory.Exists(logDirectory))
                     Directory.CreateDirectory(logDirectory);
-
-                if (Config.WriteLogConsole)
-                {
-                    _logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.Console()
-                .WriteTo.File(
-                    Path.Combine(logDirectory, $"system_log_.txt"),
-                    rollingInterval: RollingInterval.Day, // One log file per day
-                    retainedFileCountLimit: null, // Null keeps files indefinitely
-                    shared: true // Allows real-time log writing monitoring
-                    )
-                .CreateLogger();
-                }
-                else
-                {
-                    _logger = new LoggerConfiguration()
-                   .MinimumLevel.Debug()
-                   //.WriteTo.Console()
-                   .WriteTo.File(
-                       Path.Combine(logDirectory, $"system_log_.txt"),
-                       rollingInterval: RollingInterval.Day, // One log file per day
-                       retainedFileCountLimit: null, // Null keeps files indefinitely
-                       shared: true // Allows real-time log writing monitoring
-                       )
-                   .CreateLogger();
-                }
-
+                
+                _logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
+                    .WriteTo.Console()
+                    .WriteTo.File(
+                        Path.Combine(logDirectory, $"system_log_.txt"),
+                        rollingInterval: RollingInterval.Day, // One log file per day
+                        retainedFileCountLimit: null, // Null keeps files indefinitely
+                        shared: true // Allows real-time log writing monitoring
+                        )
+                    .CreateLogger();
+                
                 // Creates the universal Serilog logger
                 Log.Logger = _logger;
-
             }
             catch (Exception)
             {

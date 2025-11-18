@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FakeStoreOrderCreator.Library")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45ef2b469d8f3f9e76b5514f05c17558e0ca443e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7ab3d46cde56fce8311798a50027ff6492c31a2")]
 [assembly: System.Reflection.AssemblyProductAttribute("FakeStoreOrderCreator.Library")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FakeStoreOrderCreator.Library")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -17,7 +17,7 @@ namespace FakeStoreOrderCreator.Business.Configuration
         private static string? _fakeStoreDirectory;
         private static string? _apiUrl;
         private static int _interval;
-        private static bool _writeLogConsole;
+        private static bool _useSerilog;
         #endregion
 
         #region Properties
@@ -33,9 +33,9 @@ namespace FakeStoreOrderCreator.Business.Configuration
         {
             get { return _interval; }
         }
-        public static bool WriteLogConsole
+        public static bool UseSerilog
         {
-            get { return _writeLogConsole; }
+            get { return _useSerilog; }
         }
         #endregion
 
@@ -49,8 +49,6 @@ namespace FakeStoreOrderCreator.Business.Configuration
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .Build();
 
-                _writeLogConsole = Convert.ToBoolean(_config["AppConfig:WriteLogConsole"]);
-                
                 string logDirectory = _config["AppLogging:LogDirectory"] ?? "logs".Replace(@"/", "\\");
                 Logger.InitLogger(logDirectory);
                 Logger.Info("Logger initialized, loading settings...");
@@ -64,8 +62,9 @@ namespace FakeStoreOrderCreator.Business.Configuration
                 int interval = Convert.ToInt32(_config["AppConfig:Interval"]);
                 _interval = interval == 0 ? 60 : interval;
                 Logger.Debug(_className, "LoadConfig", $"Interval: {_interval} seconds");
-                
-                Logger.Debug(_className, "LoadConfig", $"WriteLogConsole: {_writeLogConsole}");
+
+                _useSerilog = Convert.ToBoolean(_config["AppConfig:UseSerilog"]);
+                Logger.Debug(_className, "LoadConfig", $"UseSerilog: {_useSerilog}");
 
                 Logger.Info("Settings loaded!");
             }
