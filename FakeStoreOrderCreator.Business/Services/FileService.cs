@@ -138,6 +138,7 @@ namespace FakeStoreOrderCreator.Business.Services
                         jsonObject.Add("OrderGuid", item.OrderGuid);
                         jsonObject.Add("PaymentStatus", item.PaymentStatus.ToString());
                         jsonObject.Add("PaymentDate", item.PaymentDate);
+                        jsonObject.Add("TotalPrice", item.TotalPrice);
 
                         string fileContent = jsonObject.ToJsonString(options);
                         File.WriteAllText(filePath, fileContent);

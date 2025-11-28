@@ -136,12 +136,15 @@ namespace FakeStoreOrderCreator.Business
                             var orderItem = new OrderItem()
                             {
                                 Title = product.Title,
-                                Price = product.Price,
+                                Price = Convert.ToDecimal(product.Price),
                                 Description = product.Description,
                                 Category = product.Category,
                                 Image = product.Image,
                                 Quantity = cartProduct.Quantity
                             };
+
+                            orderItem.TotalPrice = orderItem.Quantity * orderItem.Price;
+                            order.TotalPrice += orderItem.TotalPrice;
 
                             order.Items.Add(orderItem);
                             Logger.Debug(_className, "CreateOrders", $"Product: {orderItem.Title} added - Quantity: {orderItem.Quantity}");
