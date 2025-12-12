@@ -3,7 +3,7 @@
 ## Visão geral
 Este repositório contém um Serviço Windows construído com .NET 8 e TopShelf. O projeto já vem estruturado com camadas separadas (Host → Business → Library), configuração centralizada, logging com Serilog e execução baseada em timer.
 
-O propósito é criar um serviço que usa uma API para consumir e obter os dados da fakestoreapi.com, em seguida ele vai criar pedidos com base nesses dados e vai registrá-los em arquivos JSON.  
+O propósito é criar um serviço que usa a FakeStoreAPI (https://github.com/LuccaTi/FakeStoreAPI.git) para consumir e obter os dados da fakestoreapi.com, em seguida ele vai criar pedidos com base nesses dados e vai registrá-los em arquivos JSON.  
 
 A execução do trabalho é feita de forma assíncrona para maximizar a eficiência do uso dos recursos computacionais.
 
@@ -66,6 +66,8 @@ Seções disponíveis:
   - `WriteLogConsole`: flag que indica se o serviço deve registrar os logs no console assim como faz nos arquivos.
 
 ## Uso e Instalação
+O serviço está configurado para consumir a API como localhost, logo precisa executar o comando "dotnet dev-certs https --trust" no terminal como administrador para que o certificado de conexão seja validado.
+
 O código precisa ser compilado tanto em versão Debug quanto versão Release para gerar o executável, em seguida pode rodar como console ao 
 usar o .exe no terminal (cmd, por exemplo), também pode ser instalado ao adicionar o argumento "install", o mesmo se aplica para 
 desinstalá-lo, porém o argumento é "uninstall".

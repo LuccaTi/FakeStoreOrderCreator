@@ -78,25 +78,10 @@ namespace FakeStoreOrderCreator.Host
         {
             try
             {
-                // HttpClient
-                bool isDevelopment = IsDevelopmentEnvironment();
                 services.AddHttpClient<IApiService, ApiService>(client =>
                 {
                     client.BaseAddress = new Uri(Config.ApiUrl);
                     client.Timeout = TimeSpan.FromSeconds(30);
-                })
-                .ConfigurePrimaryHttpMessageHandler(() =>
-                {
-                    var handler = new System.Net.Http.HttpClientHandler();
-
-                    if (isDevelopment)
-                    {
-                        handler.ServerCertificateCustomValidationCallback =
-                            (message, cert, chain, errors) => true;
-                        Logger.Info("SSL certificate validation is disabled (Development mode)");
-                    }
-
-                    return handler;
                 });
 
                 services.AddSingleton<IServiceProcessingOrchestrator, ServiceProcessingOrchestrator>();
@@ -109,20 +94,6 @@ namespace FakeStoreOrderCreator.Host
                 Logger.Error("Program.cs", "ConfigureServices", $"Error while configuring services: {ex.Message}");
                 throw;
             }
-        }
-        private static bool IsDevelopmentEnvironment()
-        {
-            try
-            {
-                string apiUrl = Config.ApiUrl.ToLower();
-                return apiUrl.Contains("localhost") || apiUrl.Contains("127.0.0.1");
-            }
-            catch (Exception ex)
-            {
-                Logger.Error("Program.cs", "IsDevelopmentEnvironment", $"Error while trying to get application environment: {ex.Message}");
-                throw;
-            }
-           
         }
         private static void HandleStartupError(Exception exception)
         {
