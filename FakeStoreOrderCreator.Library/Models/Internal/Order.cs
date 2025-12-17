@@ -17,6 +17,7 @@ namespace FakeStoreOrderCreator.Library.Models.Internal
         public DateTime PaymentDate { get; set; }
         public DateTime ShippedDate { get; set; }
         public DateTime DeliveredDate { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public PaymentStatus PaymentStatus { get; set; }
         public ShippingStatus ShippingStatus { get; set; }
     }

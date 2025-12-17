@@ -136,6 +136,7 @@ namespace FakeStoreOrderCreator.Business.Services
                         };
                         var jsonObject = new JsonObject();
                         jsonObject.Add("OrderGuid", item.OrderGuid);
+                        jsonObject.Add("OrderStatus", item.OrderStatus.ToString());
                         jsonObject.Add("PaymentStatus", item.PaymentStatus.ToString());
                         jsonObject.Add("PaymentDate", item.PaymentDate);
                         jsonObject.Add("TotalPrice", item.TotalPrice);
@@ -184,6 +185,7 @@ namespace FakeStoreOrderCreator.Business.Services
                         };
                         var jsonObject = new JsonObject();
                         jsonObject.Add("OrderGuid", item.OrderGuid);
+                        jsonObject.Add("OrderStatus", item.OrderStatus.ToString());
                         jsonObject.Add("ShippingStatus", item.ShippingStatus.ToString());
                         jsonObject.Add("ShippedDate", item.ShippedDate);
 
@@ -232,6 +234,7 @@ namespace FakeStoreOrderCreator.Business.Services
                         };
                         var jsonObject = new JsonObject();
                         jsonObject.Add("OrderGuid", item.OrderGuid);
+                        jsonObject.Add("OrderStatus", item.OrderStatus.ToString());
                         jsonObject.Add("ShippingStatus", item.ShippingStatus.ToString());
                         jsonObject.Add("DeliveredDate", item.DeliveredDate);
 

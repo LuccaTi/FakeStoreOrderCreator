@@ -101,6 +101,7 @@ namespace FakeStoreOrderCreator.Business
                     {
                         OrderGuid = Guid.NewGuid().ToString(),
                         OrderDate = DateTime.Now,
+                        OrderStatus = OrderStatus.Created,
                         PaymentStatus = PaymentStatus.Pending,
                         ShippingStatus = ShippingStatus.NotStarted
                     };
@@ -177,6 +178,7 @@ namespace FakeStoreOrderCreator.Business
 
                     if (paymentConfirmed)
                     {
+                        order.OrderStatus = OrderStatus.Confirmed;
                         order.PaymentStatus = PaymentStatus.Confirmed;
                         order.PaymentDate = DateTime.Now;
                         _paymentConfirmedOrders.Add(order);
@@ -196,6 +198,7 @@ namespace FakeStoreOrderCreator.Business
             {
                 foreach (var order in _paymentConfirmedOrders)
                 {
+                    order.OrderStatus = OrderStatus.Sent;
                     order.ShippingStatus = ShippingStatus.Shipped;
                     order.ShippedDate = DateTime.Now;
                 }
@@ -208,6 +211,7 @@ namespace FakeStoreOrderCreator.Business
 
                 foreach (var order in _paymentConfirmedOrders)
                 {
+                    order.OrderStatus = OrderStatus.Finished;
                     order.ShippingStatus = ShippingStatus.Delivered;
                     order.DeliveredDate = DateTime.Now;
                 }
