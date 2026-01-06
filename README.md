@@ -60,7 +60,7 @@ Seções disponíveis:
   - `LogLevel` (string): nível mínimo de log ("Debug", "Information", "Warning", "Error").
 
 - **`AppConfig`**:
-  - `Interval` (int): intervalo em milissegundos entre execuções do timer (padrão: 10000 = 10 segundos).
+  - `Interval` (int): intervalo em segundos entre execuções do timer (padrão: 60 = 60 segundos).
   - `FakeStoreDirectory` (string): caminho para o diretório base dos arquivos da fakestore.
   - `ApiUrl` (string): url que aponta para a API responsável por consumir a fakestoreapi.com.
   - `WriteLogConsole`: flag que indica se o serviço deve registrar os logs no console assim como faz nos arquivos.
